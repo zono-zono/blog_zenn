@@ -14,6 +14,7 @@
 |---|---|---|
 | Delta Live Tables（DLT） | Lakeflow Spark Declarative Pipelines（SDP） | 2025 年の Data + AI Summit で改称が発表された。Python は `import dlt` → `from pyspark import pipelines as dp`、`@dlt.table` → `@dp.table`、`@view` → `@temporary_view`。旧コードはそのまま動く |
 | Databricks Workflows | Lakeflow Jobs | 公式ドキュメントで表記を確認してから指摘する |
+| Databricks Asset Bundles（DAB） | Declarative Automation Bundles | 2026-03-16 に改称。CLI コマンド（`databricks bundle`）と設定ファイルは変更不要 |
 | Databricks SQL Endpoint | SQL Warehouse（SQL ウェアハウス） | |
 | Hive metastore 前提の説明 | Unity Catalog 前提が既定 | 新規ワークスペースでは Unity Catalog が既定。Hive metastore の手順を書く場合は「レガシー」と明記する |
 
