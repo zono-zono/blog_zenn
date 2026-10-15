@@ -6,7 +6,8 @@
     "new:article": "zenn new:article",
     "preview": "zenn preview",
     "lint": "textlint articles books",
-    "lint:fix": "textlint --fix articles books"
+    "lint:fix": "textlint --fix articles books",
+    "readme": "node scripts/update-readme.mjs"
   },
   "repository": {
     "type": "git",
