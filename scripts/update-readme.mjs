@@ -38,21 +38,11 @@ const articles = readdirSync("articles")
   })
   .sort((a, b) => (b.date || "9999").localeCompare(a.date || "9999") || a.title.localeCompare(b.title));
 
-const rows = articles.map((a) => {
-  const status = a.published === "true" ? "公開" : "下書き";
-  const type = a.type === "idea" ? "💡 アイデア" : "🛠 技術";
-  const topics = (a.topics ?? []).map((t) => `\`${t}\``).join(" ");
-  return `| ${a.date || "-"} | ${a.emoji ?? ""} [${a.title}](${a.path}) | ${type} | ${topics} | ${status} |`;
-});
+const rows = articles
+  .filter((a) => a.published === "true")
+  .map((a) => `| ${a.date || "-"} | [${a.title}](${a.path}) |`);
 
-const published = articles.filter((a) => a.published === "true").length;
-const table = [
-  `公開 ${published} 本、下書き ${articles.length - published} 本です。`,
-  "",
-  "| 追加日 | タイトル | 種類 | トピック | 状態 |",
-  "|---|---|---|---|---|",
-  ...rows,
-].join("\n");
+const table = ["| 日付 | タイトル |", "|---|---|", ...rows].join("\n");
 
 const readme = readFileSync("README.md", "utf8");
 const pattern = new RegExp(`${START}[\\s\\S]*?${END}`);
