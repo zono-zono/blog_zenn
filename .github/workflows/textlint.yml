@@ -1,0 +1,59 @@
+name: textlint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "articles/**.md"
+      - "books/**.md"
+      - ".textlintrc.json"
+      - "prh/**"
+  pull_request:
+    paths:
+      - "articles/**.md"
+      - "books/**.md"
+      - ".textlintrc.json"
+      - "prh/**"
+
+permissions:
+  contents: read
+
+jobs:
+  textlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # 既存記事のエラーで落ちないよう、今回変更された記事だけを検査する。
+      # 設定や辞書を変えたときは全記事を検査する。
+      - name: Collect changed files
+        id: files
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+          if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          if git diff --name-only "$base" HEAD | grep -qE '^(\.textlintrc\.json|prh/)'; then
+            files="$(git ls-files 'articles/*.md' 'books/**/*.md' | tr '\n' ' ')"
+          else
+            files="$(git diff --name-only --diff-filter=ACMR "$base" HEAD -- 'articles/*.md' 'books/**/*.md' | tr '\n' ' ')"
+          fi
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+          echo "対象: ${files:-なし}"
+
+      - name: Run textlint
+        if: steps.files.outputs.files != ''
+        run: npx textlint ${{ steps.files.outputs.files }}

@@ -1,0 +1,4 @@
+{
+  "textlint.languages": ["markdown"],
+  "textlint.run": "onType"
+}

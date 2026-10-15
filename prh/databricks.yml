@@ -1,0 +1,88 @@
+# Databricks / データ基盤まわりの表記統一辞書
+# 公式ドキュメントの表記に合わせる。製品名が改称されたもの（DLT など）は
+# 時期によって正解が変わるため、ここでは扱わず zenn-review スキル側で確認する。
+version: 1
+rules:
+  - expected: Databricks
+    patterns:
+      - /\b[Dd]ata[Bb]ricks\b/
+      - /\bdatabricks\b(?![\-_./])/
+      - データブリックス
+      - データブリックス社
+    specs:
+      - from: DataBricksで分析する
+        to: Databricksで分析する
+      - from: データブリックスを使う
+        to: Databricksを使う
+
+  - expected: Unity Catalog
+    patterns:
+      - /\b[Uu]nity ?[Cc]atalog\b/
+      - ユニティカタログ
+    specs:
+      - from: unity catalogの権限
+        to: Unity Catalogの権限
+      - from: UnityCatalogで管理
+        to: Unity Catalogで管理
+
+  - expected: Delta Lake
+    patterns:
+      - /\b[Dd]elta ?[Ll]ake\b/
+      - デルタレイク
+    specs:
+      - from: DeltaLakeのテーブル
+        to: Delta Lakeのテーブル
+
+  - expected: Delta Sharing
+    pattern: /\b[Dd]elta ?[Ss]haring\b/
+
+  - expected: Auto Loader
+    patterns:
+      - /\b[Aa]uto ?[Ll]oader\b/
+      - オートローダー
+    specs:
+      - from: AutoLoaderで取り込む
+        to: Auto Loaderで取り込む
+
+  - expected: Apache Spark
+    pattern: /\b[Aa]pache ?[Ss]park\b/
+
+  - expected: PySpark
+    pattern: /\b[Pp]y[Ss]park\b/
+    specs:
+      - from: pysparkで書く
+        to: PySparkで書く
+
+  - expected: Spark SQL
+    pattern: /\b[Ss]park ?[Ss]ql\b/
+
+  - expected: MLflow
+    pattern: /\b(?:MLFlow|MlFlow|Mlflow|mlFlow)\b/
+
+  - expected: Databricks SQL
+    pattern: /\bDatabricks ?Sql\b/
+
+  - expected: Photon
+    pattern: /\bphoton\b/
+
+  - expected: Mosaic AI
+    pattern: /\b[Mm]osaic ?[Aa][Ii]\b/
+
+  - expected: Genie
+    pattern: /\bgenie\b(?![\-_./])/
+
+  - expected: dbt
+    pattern: /\b(?:DBT|Dbt)\b/
+
+  - expected: Great Expectations
+    pattern: /\b[Gg]reat ?[Ee]xpectations\b/
+
+  - expected: レイクハウス
+    patterns:
+      - レークハウス
+      - レイク・ハウス
+
+  - expected: メダリオンアーキテクチャ
+    patterns:
+      - メダリオン・アーキテクチャ
+      - メダリオンアーキテクチャー

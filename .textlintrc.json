@@ -1,0 +1,53 @@
+{
+  "plugins": {},
+  "filters": {
+    "comments": true,
+    "allowlist": {
+      "allow": [
+        "/^:::.*$/m",
+        "/@\\[card\\]\\(.*?\\)/",
+        "/@\\[[a-z]+\\]\\(.*?\\)/"
+      ]
+    }
+  },
+  "rules": {
+    "preset-ja-technical-writing": {
+      "sentence-length": {
+        "max": 100
+      },
+      "no-exclamation-question-mark": {
+        "allowHalfWidthExclamation": false,
+        "allowFullWidthExclamation": true,
+        "allowHalfWidthQuestion": true,
+        "allowFullWidthQuestion": true
+      },
+      "ja-no-mixed-period": {
+        "allowPeriodMarks": [
+          ":",
+          "："
+        ]
+      },
+      "max-kanji-continuous-len": {
+        "max": 7
+      },
+      "ja-no-weak-phrase": false,
+      "no-mix-dearu-desumasu": {
+        "preferInHeader": "",
+        "preferInBody": "ですます",
+        "preferInList": "",
+        "strict": false
+      }
+    },
+    "preset-ai-writing": true,
+    "ja-no-inappropriate-words": true,
+    "no-hoso-kinshi-yogo": true,
+    "prh": {
+      "rulePaths": [
+        "./prh/databricks.yml",
+        "./node_modules/@azu/prh.yml/software.yml",
+        "./node_modules/@azu/prh.yml/ja/typo.yml",
+        "./prh/web+db.yml"
+      ]
+    }
+  }
+}
