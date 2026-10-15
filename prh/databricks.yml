@@ -5,8 +5,9 @@ version: 1
 rules:
   - expected: Databricks
     patterns:
-      - /\b[Dd]ata[Bb]ricks\b/
-      - /\bdatabricks\b(?![\-_./])/
+      - /\b(?:DataBricks|DATABRICKS|dataBricks)\b/
+      # 小文字はパッケージ名・ファイル名・コマンド（dbt-databricks, databricks.yml, databricks bundle）を除く
+      - /(?<![\-_./`])\bdatabricks\b(?![\-_./]| bundle| auth| fs| jobs| workspace)/
       - データブリックス
       - データブリックス社
     specs:
@@ -14,6 +15,8 @@ rules:
         to: Databricksで分析する
       - from: データブリックスを使う
         to: Databricksを使う
+      - from: dbt-databricksとdatabricks.ymlを使う
+        to: dbt-databricksとdatabricks.ymlを使う
 
   - expected: Unity Catalog
     patterns:
